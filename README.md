@@ -5,19 +5,51 @@ For best results, you'll want to save these so they are always available and set
 ## Format Top Row
 This may be my most-used macro. In one click it format the table header and freeze the top pane. It makes tables a lot easier on the eyes and knows exactly what to format.
 
+```bas
+    'Active sheet only
+    Dim toprow As Range
+    'Header column needs to be on row 1, but this can be changed.
+    'Looks for right-most used column
+    Set toprow = Range("A1:" & Range("IV1").End(xlToLeft).Address)
+    Range("A2").Select
+    ActiveWindow.FreezePanes = True
+    'Sets a grey background with white bold text
+    With toprow.Interior
+        .Pattern = xlSolid
+        .PatternColorIndex = xlAutomatic
+        .ThemeColor = xlThemeColorDark2
+        .TintAndShade = -0.249977111117893
+        .PatternTintAndShade = 0
+    End With
+    toprow.Font.Bold = True
+    toprow.Font.Color = vbWhite
+```
+[➥full code](/macros/format_top_row.bas)
+    
 ## Number Format
-I usually want my numbers formatted like this: `452,199`
-
-Not like this: `452199`
-
-Not like this: `452,199.00`
-
-And not like this: `|      452,199|`
+I usually want my numbers formatted like this: `452,199`  
+Not like this: `452199`  
+Not like this: `452,199.00`  
+And not like this: `|`&nbsp;&nbsp;&nbsp;&nbsp;`452,199|`
 
 This means centered, with a comma separator, and no decimals. Crazily, the only way to do this is with many clicks (I think 8 is the least) through the `Format Cells` dialog. FTFY:
 
+```bas
+    Selection.NumberFormat = "#,##0"
+    Selection.HorizontalAlignment = xlCenter
+```
+
 ## Better AutoFilter
 I filter my tables a lot, so I made one button that enables auto-filter on a table, clears any existing filters, and shuts auto-filter. It cuts down on clicks and is really how the auto-filter button should work.
+
+```bas
+    On Error Resume Next
+    If ActiveSheet.FilterMode = True Then
+        ActiveSheet.ShowAllData
+    Else
+        Selection.AutoFilter
+    End If
+```
 
 ## Formula Check
 With a single click this macro will select all cells with formulas on the page. This is useful if you’re going to publish or share a spreadsheet and want the values hard coded.
