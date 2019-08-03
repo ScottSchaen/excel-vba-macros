@@ -201,11 +201,18 @@ outputcell.Value = Left(outputcell.Value, Len(outputcell.Value) - 2)
 * Try to change, tweak, add to these to make them more personalized for you
 
 ## How To Get Started:
-1. You need to create a "Personal Macro Workbook" so that your macros are always available when Excel is open.
-* You can read the [Windows Documentation](https://support.office.com/en-gb/article/copy-your-macros-to-a-personal-macro-workbook-aa439b90-f836-4381-97f0-6e4c3f5ee566#OfficeVersion=Windows) or the [Mac Documentation](https://support.office.com/en-gb/article/copy-your-macros-to-a-personal-macro-workbook-aa439b90-f836-4381-97f0-6e4c3f5ee566#OfficeVersion=macOS) but the gist is this:
-a. Enable the Developer tab in your Excel ribbon
-b. Click `Record Macro` and choose to store the macro in "Personal Macro Workbook"
-c. `Stop Recording` the macro and click the `Visual Basic` button (or press <kbd>alt</kbd><kbd>F11</kbd>
-d. On the project explorer (top left) find `PERSONAL.XLSB`, expand `Modules`, and that's where you want to store all of your macros. You can leave them all in `Module1` or separate them. I prefer less modules, but it doesn't make a huge difference.
+1. You need to create a "Personal Macro Workbook" so that **your macros are always available** when Excel is open.
 
-2. When you have your macros saved in `PERSONAL.XLSB` you want to customize the ribbon and add them as commands there.
+You can read the [Windows Documentation](https://support.office.com/en-gb/article/copy-your-macros-to-a-personal-macro-workbook-aa439b90-f836-4381-97f0-6e4c3f5ee566#OfficeVersion=Windows) or the [Mac Documentation](https://support.office.com/en-gb/article/copy-your-macros-to-a-personal-macro-workbook-aa439b90-f836-4381-97f0-6e4c3f5ee566#OfficeVersion=macOS) but the gist is this:  
+&nbsp;&nbsp;&nbsp; a) Enable the Developer tab in your Excel ribbon  
+&nbsp;&nbsp;&nbsp; b) Click `Record Macro` and choose to store the macro in "Personal Macro Workbook"  
+&nbsp;&nbsp;&nbsp; c) `Stop Recording` the macro and click the `Visual Basic` button (or press <kbd>alt</kbd><kbd>F11</kbd>)  
+&nbsp;&nbsp;&nbsp; d) On the project explorer (top left) find `PERSONAL.XLSB`, expand `Modules`, and that's where you want to store all of your macros. You can leave them all in `Module1` or separate them. I prefer less modules, but it doesn't make a huge difference.
+
+2. When you have your macros saved in `PERSONAL.XLSB` you want to **customize the ribbon** and add them as commands/buttons there.
+
+**Windows:** Right click anywhere on the ribbon and select `Customize the Ribbon...`
+**Mac:** `Excel` → `Preferences` → `Ribbon & Toolbar`
+
+(You can read about this in my 5 Stupid Easy Excel Tips)[https://github.com/ScottSchaen/stupid-easy-excel-tips/blob/master/README.md#5-customize-the-home-ribbon--load-it-up-with-only-useful-functions]
+
