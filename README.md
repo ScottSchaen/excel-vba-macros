@@ -195,9 +195,17 @@ outputcell.Value = Left(outputcell.Value, Len(outputcell.Value) - 2)
 * There’s no undo for a macro! (Unless you program one in)
 * These macros have been working for me, though it's very possible they can be improved.
 * Practice by recording macros, but try to remove a lot of the fluff and absolute references they use
-* You need to get `PERSONAL.xlsb` working so the macros are always available
+* You need to get `PERSONAL.XLSB` working so the macros are always available
 * You want the right icon for your macro, but you’re limited
 * Some functions may not work on a Mac.
 * Try to change, tweak, add to these to make them more personalized for you
 
 ## How To Get Started:
+1. You need to create a "Personal Macro Workbook" so that your macros are always available when Excel is open.
+* You can read the [Windows Documentation](https://support.office.com/en-gb/article/copy-your-macros-to-a-personal-macro-workbook-aa439b90-f836-4381-97f0-6e4c3f5ee566#OfficeVersion=Windows) or the [Mac Documentation](https://support.office.com/en-gb/article/copy-your-macros-to-a-personal-macro-workbook-aa439b90-f836-4381-97f0-6e4c3f5ee566#OfficeVersion=macOS) but the gist is this:
+a. Enable the Developer tab in your Excel ribbon
+b. Click `Record Macro` and choose to store the macro in "Personal Macro Workbook"
+c. `Stop Recording` the macro and click the `Visual Basic` button (or press <kbd>alt</kbd><kbd>F11</kbd>
+d. On the project explorer (top left) find `PERSONAL.XLSB`, expand `Modules`, and that's where you want to store all of your macros. You can leave them all in `Module1` or separate them. I prefer less modules, but it doesn't make a huge difference.
+
+2. When you have your macros saved in `PERSONAL.XLSB` you want to customize the ribbon and add them as commands there.
