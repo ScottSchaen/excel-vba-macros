@@ -2,20 +2,20 @@
 Here are some macros I've incorporated into my day-to-day Microsoft Excel usage over the years. They help cut down on clicks so you can be more efficient with time.
 For best results, you'll want to save these so they are always available and set them up as commands/buttons in your `HOME` ribbon.
 
-# Table of Contents
-* [How to get started](#how-to-get-started)
-* [Notes and Caveats](#macro-notes--caveats)
-* [Macro: Format Top Row of your table](#format-top-row)
-* [Macro: Better number format](#better-number-format)
-* [Macro: Better AutoFilter](#better-autofilter)
-* [Macro: Check worksheet for formulas](#formula-check)
-* [Macro: Check worksheet for #N/As](#na-check)
-* [Macro: Filter table for selected cell](#filter-for-only-selected)
-* [Macro: Filter table and remove selected cell](#filter-out-remove-selected)
-* [Macro: Reset active cell to top left for all sheets in workbook](#reset-active-cell-to-top-left-for-all-sheets-in-workbook)
-* [Macro: Remove external links](#remove-external-links)
-* [Macro: Select Uniques (by removing duplicates from selection)](#select-uniques)
-* [Macro: Comma Separate Selection](#comma-separate-selection)
+# Contents
+* [*How to get started*](#how-to-get-started)
+* [*Notes and Caveats*](#macro-notes--caveats)
+* [Format Top Row of your table](#format-top-row)
+* [Better number format](#better-number-format)
+* [Better AutoFilter](#better-autofilter)
+* [Check worksheet for formulas](#formula-check)
+* [Check worksheet for #N/As](#na-check)
+* [Filter table for selected cell](#filter-for-only-selected)
+* [Filter table and remove selected cell](#filter-out-remove-selected)
+* [Reset active cell to top left for all sheets in workbook](#reset-active-cell-to-top-left-for-all-sheets-in-workbook)
+* [Remove external links](#remove-external-links)
+* [Select Uniques (by removing duplicates from selection)](#select-uniques)
+* [Comma Separate Selection](#comma-separate-selection)
 
 
 
