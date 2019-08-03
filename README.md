@@ -2,6 +2,10 @@
 Here are some macros I've incorporated into my day-to-day Microsoft Excel usage over the years. They help cut down on clicks so you can be more efficient with time.
 For best results, you'll want to save these so they are always available and set them up as commands/buttons in your `HOME` ribbon.
 
+# Table of Contents
+1. [How to get started](#how-to-get-started)
+2. [Macro Notes and Caveats](#macro-notes--caveats)
+
 ## Format Top Row
 This may be my most-used macro. In one click it format the table header and freeze the top pane. It makes tables a lot easier on the eyes and knows exactly what to format.
 
@@ -174,8 +178,13 @@ Next cell
 outputcell.Value = Left(outputcell.Value, Len(outputcell.Value) - 2)
 ```
 
-## Macro Caveats:
-* There’s no undo!
-* You gotta get personal.xls working
+## Macro Notes & Caveats:
+* There’s no undo for a macro! (Unless you program one in)
+* These macros have been working for me, though it's very possible they can be improved.
+* Practice by recording macros, but try to remove a lot of the fluff and absolute references they use
+* You need to get `PERSONAL.xlsb` working so the macros are always available
 * You want the right icon for your macro, but you’re limited
-* Some don’t work on Mac
+* Some functions may not work on a Mac.
+* Try to change, tweak, add to these to make them more personalized for you
+
+## How To Get Started:
