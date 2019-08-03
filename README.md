@@ -3,8 +3,21 @@ Here are some macros I've incorporated into my day-to-day Microsoft Excel usage 
 For best results, you'll want to save these so they are always available and set them up as commands/buttons in your `HOME` ribbon.
 
 # Table of Contents
-1. [How to get started](#how-to-get-started)
-2. [Macro Notes and Caveats](#macro-notes--caveats)
+* [How to get started](#how-to-get-started)
+* [Notes and Caveats](#macro-notes--caveats)
+* [Macro: Format Top Row of your table](#format-top-row)
+* [Macro: Better number format](#better-number-format)
+* [Macro: Better AutoFilter](#better-autofilter)
+* [Macro: Check worksheet for formulas](#formula-check)
+* [Macro: Check worksheet for #N/As](#na-check)
+* [Macro: Filter table for selected cell](#filter-for-only-selected)
+* [Macro: Filter table and remove selected cell](#filter-out-remove-selected)
+* [Macro: Reset active cell to top left for all sheets in workbook](#reset-active-cell-to-top-left-for-all-sheets-in-workbook)
+* [Macro: Remove external links](#remove-external-links)
+* [Macro: Select Uniques (by removing duplicates from selection)](#select-uniques)
+* [Macro: Comma Separate Selection](#comma-separate-selection)
+
+
 
 ## Format Top Row
 This may be my most-used macro. In one click it format the table header and freeze the top pane. It makes tables a lot easier on the eyes and knows exactly what to format.
@@ -30,7 +43,7 @@ toprow.Font.Color = vbWhite
 ```
 [➥full code](/macros/format_top_row.bas)
     
-## Number Format
+## Better Number Format
 I usually want my numbers formatted like this: `452,199`  
 Not like this: `452199`  
 Not like this: `452,199.00`  
