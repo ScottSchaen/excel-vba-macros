@@ -69,7 +69,7 @@ End If
 ```
 
 ## Formula Check
-With a single click this macro will select all cells containing a formula on the active sheet. This is useful if you’re going to publish or share a spreadsheet and want the values hard coded.
+With a single click this macro will select all cells containing a formula on the active sheet. This is useful if you’re going to publish or share a spreadsheet and want the values hard coded. After running it, you can look at the status bar (bottom right) to see how many cells/formulas are selected.
 
 ```bas
 On Error GoTo err
@@ -80,7 +80,7 @@ err:
 ```
 
 ## #N/A Check
-Don’t be the guy or gal that sends out spreadsheets with `#N/A` all over it. Use this macro to highlight all of these in your current tab. You can prevent `#N/A` by wrapping your formula in an `iferror(your_formula,value_if_error)`.
+Don’t be the guy or gal that sends out spreadsheets with `#N/A` all over it. Use this macro to highlight all of these in your current tab. You can prevent `#N/A` by wrapping your formula in an `iferror(your_formula,value_if_error)`. After running it, you can look at the status bar (bottom right) to see how many cells/#NAs are selected.
 
 ```bas
 On Error GoTo err
@@ -97,16 +97,16 @@ I was using this macro before it was built into Excel. It will filter your table
 'Only works with one cell selected
 On Error GoTo err
     'Try filtering to selected
-    Selection.AutoFilter Field:=Selection.Column, Criteria1:=Selection.Value
+    Selection.AutoFilter Field:=Selection.Column, Criteria1:="=" & Selection.Value
 Exit Sub
 err:
     If err = 1004 Then
         'Turn on autofilter if it's not on already
         Selection.AutoFilter
-        Selection.AutoFilter Field:=Selection.Column, Criteria1:=Selection.Value
+        Selection.AutoFilter Field:=Selection.Column, Criteria1:="=" & Selection.Value
     Else
         'If it doesn't work, filter to '#N/A'
-        Selection.AutoFilter Field:=Selection.Column, Criteria1:="#N/A"
+        Selection.AutoFilter Field:=Selection.Column, Criteria1:="=#N/A"
     End If
 ```
 
