@@ -154,23 +154,36 @@ This can be achieved a few ways in Excel, but I like my way best :) It selects o
 
 ```bas
 'Selection does not need to be a single range, but it does need to be on the same sheet.
+'Warning if too many cells are selected. It should still run, it just might take a minute.
 If Selection.Count > 5000 Then
-    response = MsgBox("This could take a while", vbOKOnly + vbInformation)
+    response = MsgBox("This could take a while", vbOKCancel + vbInformation)
     If response = vbCancel Then Exit Sub
 End If
-Dim d As Dictionary
-Set d = New Dictionary
+ReDim vals(Selection.Count)
 Dim uniques As Range
-For Each cell In Selection.Cells
-    If first = False Then Set uniques = cell
-    first = True
-    'Removes blank cells from consideration
-    If d(cell.Value) = False And cell.Value <> "" Then
-        d(cell.Value) = True
-        Set uniques = Union(uniques, cell)
+'Cycle through all values in selection
+For Each cell In Selection
+    'For non-blank cells...
+    If cell.Value <> "" Then
+        'Set first value
+        If uniques Is Nothing Then
+            Set uniques = cell
+            vals(1) = cell.Value
+            uniq_counter = 2
+        End If
+        'Check each cell against previously set unique values
+        For checker = 1 To uniq_counter - 1
+            If vals(checker) = cell.Value Then Exit For
+            If checker = uniq_counter - 1 Then
+                Set uniques = Union(uniques, cell)
+                vals(uniq_counter) = cell.Value
+                uniq_counter = uniq_counter + 1
+            End If
+        Next checker
     End If
 Next cell
-uniques.Select
+'Select unique range if it exists
+If Not uniques Is Nothing Then uniques.Select
 ```
 ## Comma Separate Selection
 This is a really useful feature if you use SQL or use a BI tool that filters on comma separated values. It simply takes all of your cells in a selection and comma separates them into a near by cell. The macro will ask you if you want to wrap the values in quotes (for strings). It can be used with the `Select Uniques` macro to only comma separate unique values in a selection.
