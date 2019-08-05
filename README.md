@@ -47,7 +47,7 @@ toprow.Font.Color = vbWhite
 I usually want my numbers formatted like this: `452,199`  
 Not like this: `452199`  
 Not like this: `452,199.00`  
-And not like this: `|`&nbsp;&nbsp;&nbsp;&nbsp;`452,199|`
+And not like this: `|_____452,199|` (right justified)
 
 This means centered, with a comma separator, and no decimals. Crazily, the only way to do this is with many clicks (I think 8 is the least) through the `Format Cells` dialog. FTFY:
 
@@ -260,7 +260,13 @@ You can read the [Windows Documentation](https://support.office.com/en-gb/articl
 **Windows:** Right click anywhere on the ribbon and select `Customize the Ribbon...`
 **Mac:** `Excel` → `Preferences` → `Ribbon & Toolbar`
 
-![Ribbon Customization for Macros](/images/ribbon_config_macros.png)[]()
+<p align="center">
+  <img width="900" src="/images/macro_ribbon.png">
+</p>
+
+<p align="center">
+  <img width="630" src="/images/ribbon_config_macros.png">
+</p>
 
 (You can read about this in my 5 Stupid Easy Excel Tips)[https://github.com/ScottSchaen/stupid-easy-excel-tips/blob/master/README.md#5-customize-the-home-ribbon--load-it-up-with-only-useful-functions]
 
