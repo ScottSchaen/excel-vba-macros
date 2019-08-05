@@ -94,7 +94,8 @@ err:
 I was using this macro before it was built into Excel. It will filter your table and show you just values of the cell you have selected. Alternatively, you can right click on the cell and go to `Filter` → `Filter by Selected Cell’s Value`
 
 ```bas
-'Only works with one cell selected
+'Only filters one cell so this reduces the selection to one cell if multiple are selected
+If Selection.Count > 1 Then ActiveCell.Select
 On Error GoTo err
     'Try filtering to selected
     Selection.AutoFilter Field:=Selection.Column, Criteria1:="=" & Selection.Value
@@ -114,7 +115,8 @@ err:
 This does the opposite of above and filters out or removes only the selected value from your table. For instance, say you have a list of orders and want to remove all orders with a $0 value. Just click $0 in the table and then run this macro. 
 
 ```bas
-'Only works with one cell selected
+'Only filters one cell so this reduces the selection to one cell if multiple are selected
+If Selection.Count > 1 Then ActiveCell.Select
 On Error GoTo err
     Selection.AutoFilter Field:=Selection.Column, Criteria1:="<>" & Selection.Value, Operator:=xlAnd
 Exit Sub
@@ -251,7 +253,7 @@ You can read the [Windows Documentation](https://support.office.com/en-gb/articl
 &nbsp;&nbsp;&nbsp; a) Enable the Developer tab for your Excel ribbon  
 &nbsp;&nbsp;&nbsp; b) Click `Record Macro` and choose to store the macro in "Personal Macro Workbook"  
 &nbsp;&nbsp;&nbsp; c) `Stop Recording` the macro and click the `Visual Basic` button (or press <kbd>alt</kbd><kbd>F11</kbd>)  
-&nbsp;&nbsp;&nbsp; d) On the project explorer (top left) find `PERSONAL.XLSB`, expand `Modules`, and that's where you want to store all of your macros. You can leave them all in `Module1` or separate them. I prefer less modules, but it doesn't make a huge difference.
+&nbsp;&nbsp;&nbsp; d) On the project explorer (top left) find `PERSONAL.XLSB`, expand `Modules`, and that's where you want to store all of your macros. You can leave them all in `Module1` or separate them. I prefer less modules, but it doesn't make a huge difference. Remember to Save!
 
 ### When you have your macros saved in `PERSONAL.XLSB` you want to **customize the ribbon** and add them as commands/buttons there.
 
