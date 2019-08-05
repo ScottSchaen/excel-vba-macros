@@ -1,4 +1,6 @@
+'Remove Attribute VB_Name line if copying and pasting into a VBA Module. Keep if downloading file and importing.
 Attribute VB_Name = "ScottsMacros"
+
 Sub FormatTopRow()
 'Purpose: Freezes and formats the top row of the table to make it easier to look at and work with
 'Active sheet only
