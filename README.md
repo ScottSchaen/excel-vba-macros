@@ -1,6 +1,5 @@
-# Excel Shortcuts - Helpful Macros in VBA
-Here are some macros I've incorporated into my day-to-day Microsoft Excel usage over the years. They help cut down on clicks so you can be more efficient with time.
-For best results, you'll want to save these so they are always available and set them up as commands/buttons in your `HOME` ribbon.
+# VBA Macros to Super Charge Microsoft Excel
+Become a Microsoft Excel power user with these handy VBA macros. I've been using and fine-tuning these for years to help make my day-to-day tasks more efficient. Take them and make them your own. You can download all the macros at (macros/scotts_macros_all.bas)[/macros/scotts_macros_all.bas]. If you're new to VBA and Excel macros you'll want to read my notes on [getting started](#how-to-get-started). Be sure to add these as commands/buttons to Excel's `HOME` ribbon to really make them useful!
 
 # Contents
 * [*How to get started*](#how-to-get-started)
@@ -80,7 +79,7 @@ err:
 ```
 
 ## #N/A Check
-Don’t be the guy or gal that sends out spreadsheets with `#N/A` all over it. Use this macro to highlight all of these in your current tab. You can prevent `#N/A` by wrapping your formula in an `iferror(your_formula,value_if_error)`. After running it, you can look at the status bar (bottom right) to see how many cells/#NAs are selected.
+Don’t be the guy or gal that sends out spreadsheets with `#N/A` all over it. Use this macro to highlight all of these in your current tab. It will catch other types of error cells too, like `DIV/0!`. You can prevent `#N/A` by wrapping your formula in an `iferror(your_formula,value_if_error)`. After running it, you can look at the status bar (bottom right) to see how many cells/#NAs are selected.
 
 ```bas
 On Error GoTo err
@@ -261,11 +260,7 @@ You can read the [Windows Documentation](https://support.office.com/en-gb/articl
 **Mac:** `Excel` → `Preferences` → `Ribbon & Toolbar`
 
 <p align="center">
-  <img width="900" src="/images/macro_ribbon.png">
-</p>
-
-<p align="center">
-  <img width="630" src="/images/ribbon_config_macros.png">
+  <img width="900" src="/images/macro_ribbon_and_config.png">
 </p>
 
 (You can read about this in my 5 Stupid Easy Excel Tips)[https://github.com/ScottSchaen/stupid-easy-excel-tips/blob/master/README.md#5-customize-the-home-ribbon--load-it-up-with-only-useful-functions]
