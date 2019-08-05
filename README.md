@@ -147,14 +147,42 @@ currsheet.Activate
 ```
 
 ## Remove External Links
-If you’re sharing spreadsheets and you occasionally reference other workbooks, this macro is a must. It will scan through your workbook looking for external formulas and then will replace the link with the value.
+If you’re sharing spreadsheets and you occasionally reference other workbooks, this macro is a must. The macro gives you a few options for replacing external references with their values -- you can just remove external references in the selected cells, or the entire active worksheet, or the entire workbook. You can't undo this function so use with caution!
+
+```bas
+'Only applies to cells in selection
+Dim replaced As Integer
+replaced = 0
+wholebook = MsgBox("Do you want to Remove External Formulas from the whole WORKBOOK? Click no for active sheet or selection. You Can't Undo This!!", vbYesNoCancel + vbInformation, "Apply to whole WORKBOOK?")
+If wholebook = vbCancel Then Exit Sub
+If wholebook = vbNo Then
+    wholesheet = MsgBox("Do you want to Remove External Formulas from the whole WORKSHEET? Click no if you just want to remove from the selection. You Can't Undo This!!", vbYesNoCancel, "Apply to whole WORKSHEET?")
+    If wholesheet = vbCancel Then Exit Sub
+    If wholesheet = vbYes Then ActiveSheet.UsedRange.Select
+    For Each cell In Selection
+        If InStr(cell.Formula, "!") > 0 Then
+            cell.Value = cell.Value
+            replaced = replaced + 1
+        End If
+    Next cell
+Else
+    For Each sheet In ActiveWorkbook.Worksheets
+        For Each cell In sheet.UsedRange
+            If InStr(cell.Formula, "!") > 0 Then
+               cell.Value = cell.Value
+               replaced = replaced + 1
+            End If
+        Next cell
+    Next sheet
+End If
+MsgBox replaced & " formula(s) removed!"
+```
 
 ## Select Uniques
 This can be achieved a few ways in Excel, but I like my way best :) It selects only unique values in your selection. There’s a number of use-cases here. 
 
 ```bas
 'Selection does not need to be a single range, but it does need to be on the same sheet.
-'Warning if too many cells are selected. It should still run, it just might take a minute.
 If Selection.Count > 5000 Then
     response = MsgBox("This could take a while", vbOKCancel + vbInformation)
     If response = vbCancel Then Exit Sub
@@ -185,6 +213,7 @@ Next cell
 'Select unique range if it exists
 If Not uniques Is Nothing Then uniques.Select
 ```
+
 ## Comma Separate Selection
 This is a really useful feature if you use SQL or use a BI tool that filters on comma separated values. It simply takes all of your cells in a selection and comma separates them into a near by cell. The macro will ask you if you want to wrap the values in quotes (for strings). It can be used with the `Select Uniques` macro to only comma separate unique values in a selection.
 
@@ -206,26 +235,32 @@ outputcell.Value = Left(outputcell.Value, Len(outputcell.Value) - 2)
 
 ## Macro Notes & Caveats:
 * There’s no undo for a macro! (Unless you program one in)
-* These macros have been working for me, though it's very possible they can be improved.
-* Practice by recording macros, but try to remove a lot of the fluff and absolute references they use
-* You need to get `PERSONAL.XLSB` working so the macros are always available
-* You want the right icon for your macro, but you’re limited
-* Some functions may not work on a Mac.
-* Try to change, tweak, add to these to make them more personalized for you
+* You need to get `PERSONAL.XLSB` working so the macros are always available. You also want to add these macros as buttons on your Ribbon. See next section for both.
+* Excel for Mac has come a really long way, but you can't currently choose a custom icon for Macros on your ribbon :(
+* These macros have been working like a charm for me, but there's always room for improvement.
+* If you're new to macros, you can learn a lot from recording yourself doing it and/or googling "VBA + thing-you're-trying-to-do". Recording macros is really useful but try to remove the fluff and absolutely references that it writes.
+* "Step Into" your macros to go line by line and see what's happening as it runs. You can drag variables or statements to the "Watch Window" to see how they're evaluated as you step through.
+* Try to change, tweak, add to these to make them more personalized for you!
+* If you copy and paste from above, be sure to wrap it in `Sub WhateverMacroYouWant()` and `End Sub`.
+* Find me on (LinkedIn)[https://www.linkedin.com/in/scottschaen/] and send me some feedback, or propose a file change by forking this project.
 
 ## How To Get Started:
-1. You need to create a "Personal Macro Workbook" so that **your macros are always available** when Excel is open.
+### You need to create a "Personal Macro Workbook" so that **your macros are always available** when Excel is open.
 
 You can read the [Windows Documentation](https://support.office.com/en-gb/article/copy-your-macros-to-a-personal-macro-workbook-aa439b90-f836-4381-97f0-6e4c3f5ee566#OfficeVersion=Windows) or the [Mac Documentation](https://support.office.com/en-gb/article/copy-your-macros-to-a-personal-macro-workbook-aa439b90-f836-4381-97f0-6e4c3f5ee566#OfficeVersion=macOS) but the gist is this:  
-&nbsp;&nbsp;&nbsp; a) Enable the Developer tab in your Excel ribbon  
+&nbsp;&nbsp;&nbsp; a) Enable the Developer tab for your Excel ribbon  
 &nbsp;&nbsp;&nbsp; b) Click `Record Macro` and choose to store the macro in "Personal Macro Workbook"  
 &nbsp;&nbsp;&nbsp; c) `Stop Recording` the macro and click the `Visual Basic` button (or press <kbd>alt</kbd><kbd>F11</kbd>)  
 &nbsp;&nbsp;&nbsp; d) On the project explorer (top left) find `PERSONAL.XLSB`, expand `Modules`, and that's where you want to store all of your macros. You can leave them all in `Module1` or separate them. I prefer less modules, but it doesn't make a huge difference.
 
-2. When you have your macros saved in `PERSONAL.XLSB` you want to **customize the ribbon** and add them as commands/buttons there.
+### When you have your macros saved in `PERSONAL.XLSB` you want to **customize the ribbon** and add them as commands/buttons there.
 
 **Windows:** Right click anywhere on the ribbon and select `Customize the Ribbon...`
 **Mac:** `Excel` → `Preferences` → `Ribbon & Toolbar`
 
+![Ribbon Customization for Macros](/images/ribbon_config_macros.png)[]()
+
 (You can read about this in my 5 Stupid Easy Excel Tips)[https://github.com/ScottSchaen/stupid-easy-excel-tips/blob/master/README.md#5-customize-the-home-ribbon--load-it-up-with-only-useful-functions]
 
+**Happy Excelling,**  
+**Scott**
