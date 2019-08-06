@@ -9,8 +9,8 @@ ReDim vals(Selection.Count)
 Dim uniques As Range
 'Cycle through all values in selection
 For Each cell In Selection
-    'For non-blank cells...
-    If cell.Value <> "" Then
+    'Skip blank cells and errored cells
+    If Not IsError(cell) And Not IsEmpty(cell) Then
         'Set first value
         If uniques Is Nothing Then
             Set uniques = cell
