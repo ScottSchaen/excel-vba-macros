@@ -54,6 +54,7 @@ This means centered, with a comma separator, and no decimals. Crazily, the only 
 Selection.NumberFormat = "#,##0"
 Selection.HorizontalAlignment = xlCenter
 ```
+[➥full code](/macros/number_format.bas)
 
 ## Better AutoFilter
 I filter my tables a lot, so I made one button that enables auto-filter on a table, clears any existing filters, and shuts auto-filter. It cuts down on clicks and is really how the auto-filter button should work.
@@ -66,6 +67,7 @@ Else
     Selection.AutoFilter
 End If
 ```
+[➥full code](/macros/better_autofilter.bas)
 
 ## Formula Check
 With a single click this macro will select all cells containing a formula on the active sheet. This is useful if you’re going to publish or share a spreadsheet and want the values hard coded. After running it, you can look at the status bar (bottom right) to see how many cells/formulas are selected.
@@ -77,9 +79,10 @@ Exit Sub
 err:
     If err.Number = 1004 Then MsgBox "No Formulas Here!"
 ```
+[➥full code](/macros/check_for_formulas.bas)
 
 ## #N/A Check
-Don’t be the guy or gal that sends out spreadsheets with `#N/A` all over it. Use this macro to highlight all of these in your current tab. It will catch other types of error cells too, like `DIV/0!`. You can prevent `#N/A` by wrapping your formula in an `iferror(your_formula,value_if_error)`. After running it, you can look at the status bar (bottom right) to see how many cells/#NAs are selected.
+Don’t be the guy or gal that sends out spreadsheets with `#N/A` all over it. Use this macro to highlight all of these in your current tab. It will catch other types of error cells too, like `DIV/0!`. You can prevent errored formulas by wrapping your formula in an `iferror(your_formula,value_if_error)`. After running it, you can look at the status bar (bottom right) to see how many cells/#NAs are selected.
 
 ```bas
 On Error GoTo err
@@ -88,6 +91,7 @@ Exit Sub
 err:
     If err.Number = 1004 Then MsgBox "No Errors Here!"
 ```
+[➥full code](/macros/check_for_errors.bas)
 
 ## Filter for ONLY Selected
 I was using this macro before it was built into Excel. It will filter your table and show you just values of the cell you have selected. Alternatively, you can right click on the cell and go to `Filter` → `Filter by Selected Cell’s Value`
@@ -109,6 +113,7 @@ err:
         Selection.AutoFilter Field:=Selection.Column, Criteria1:="=#N/A"
     End If
 ```
+[➥full code](/macros/filter_by_selection.bas)
 
 ## Filter out (remove) Selected
 This does the opposite of above and filters out or removes only the selected value from your table. For instance, say you have a list of orders and want to remove all orders with a $0 value. Just click $0 in the table and then run this macro. 
@@ -129,6 +134,7 @@ err:
         Selection.AutoFilter Field:=Selection.Column, Criteria1:="<>#N/A", Operator:=xlAnd
     End If
 ```
+[➥full code](/macros/filter_out_selection.bas)
 
 ## Reset active cell to top left for all sheets in workbook
 This is a great feature if you share spreadsheets with a lot of tabs. It simply cycles through all your sheets placing the active cell on the top left. Useful when you're sharing spreadsheets
@@ -146,6 +152,7 @@ For Each sheet In Worksheets
 Next sheet
 currsheet.Activate
 ```
+[➥full code](/macros/top_left_active_cell.bas)
 
 ## Remove External Links
 If you’re sharing spreadsheets and you occasionally reference other workbooks, this macro is a must. The macro gives you a few options for replacing external references with their values -- you can just remove external references in the selected cells, or the entire active worksheet, or the entire workbook. You can't undo this function so use with caution!
@@ -178,6 +185,7 @@ Else
 End If
 MsgBox replaced & " formula(s) removed!"
 ```
+[➥full code](/macros/kill_external_formulas.bas)
 
 ## Select Uniques
 This can be achieved a few ways in Excel, but I like my way best :) It selects only unique values in your selection. There’s a number of use-cases here. 
@@ -214,6 +222,7 @@ Next cell
 'Select unique range if it exists
 If Not uniques Is Nothing Then uniques.Select
 ```
+[➥full code](/macros/select_uniques.bas)
 
 ## Comma Separate Selection
 This is a really useful feature if you use SQL or use a BI tool that filters on comma separated values. It simply takes all of your cells in a selection and comma separates them into a near by cell. The macro will ask you if you want to wrap the values in quotes (for strings). It can be used with the `Select Uniques` macro to only comma separate unique values in a selection.
@@ -233,6 +242,7 @@ Next cell
 'Removes trailing comma
 outputcell.Value = Left(outputcell.Value, Len(outputcell.Value) - 2)
 ```
+[➥full code](/macros/comma_separate_selection.bas)
 
 ## Macro Notes & Caveats:
 * There’s no undo for a macro! (Unless you program one in)
