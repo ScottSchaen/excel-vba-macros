@@ -1,4 +1,4 @@
-# VBA Macros to Super Charge Microsoft Excel
+# VBA Macros to Supercharge Microsoft Excel
 Become a Microsoft Excel power user with these handy VBA macros. I've been using and fine-tuning these for years to help make my day-to-day tasks more efficient. Take them and make them your own. You can download all the macros at (macros/scotts_macros_all.bas)[/macros/scotts_macros_all.bas]. If you're new to VBA and Excel macros you'll want to read my notes on [getting started](#how-to-get-started). Be sure to add these as commands/buttons to Excel's `HOME` ribbon to really make them useful!
 
 # Contents
