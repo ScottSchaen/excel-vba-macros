@@ -22,12 +22,26 @@ Become a Microsoft Excel power user with these handy VBA macros. I've been using
 This may be my most-used macro. In one click it format the table header and freeze the top pane. It makes tables a lot easier on the eyes and knows exactly what to format.
 
 ```bas
+'Purpose: Freezes and formats the top row of your table to make it easier to look at and work with
 'Active sheet only
 Dim toprow As Range
-'Header column needs to be on row 1, but this can be changed.
-'Looks for right-most used column
-Set toprow = Range("A1:" & Range("IV1").End(xlToLeft).Address)
-Range("A2").Select
+'If there's <=1 used cell in row 1 then check if the active cell is inside the table to format
+If Application.WorksheetFunction.CountA(Range("1:1")) > 1 Then
+    Set toprow = Range("A1:" & Range("IV1").End(xlToLeft).Address)
+Else
+    Dim tbl As Range
+    Set tbl = Selection.CurrentRegion
+    'If the active cell is not inside of a table then inform user and end macro
+    If tbl.Count = 1 Then
+        MsgBox "Couldn't find a table to format! Click a cell in the table and run again", vbExclamation, "Couldn't find table!"
+        Exit Sub
+    End If
+    Dim firstcell As Range
+    Set firstcell = tbl.Cells(1, 1)
+    Set toprow = Range(firstcell, firstcell.Offset(0, tbl.Columns.Count - 1))
+End If
+Cells(toprow.Row + 1, 1).Select
+ActiveWindow.FreezePanes = False
 ActiveWindow.FreezePanes = True
 'Sets a grey background with white bold text
 With toprow.Interior
@@ -97,21 +111,17 @@ err:
 I was using this macro before it was built into Excel. It will filter your table and show you just values of the cell you have selected. Alternatively, you can right click on the cell and go to `Filter` → `Filter by Selected Cell’s Value`
 
 ```bas
-'Only filters one cell so this reduces the selection to one cell if multiple are selected
+'Can be used multiple times on multiple columns
+'Only filters one cell so select first cell cell if multiple are selected
 If Selection.Count > 1 Then ActiveCell.Select
-On Error GoTo err
-    'Try filtering to selected
-    Selection.AutoFilter Field:=Selection.Column, Criteria1:="=" & Selection.Value
-Exit Sub
-err:
-    If err = 1004 Then
-        'Turn on autofilter if it's not on already
-        Selection.AutoFilter
-        Selection.AutoFilter Field:=Selection.Column, Criteria1:="=" & Selection.Value
-    Else
-        'If it doesn't work, filter to '#N/A'
-        Selection.AutoFilter Field:=Selection.Column, Criteria1:="=#N/A"
-    End If
+'Check for existing filter
+If ActiveSheet.AutoFilterMode = False Then Selection.AutoFilter
+'Autofilter uses column number relative to the table
+filtercolumn = ActiveCell.Column - ActiveSheet.AutoFilter.Range.Column + 1
+'Check for error cell
+If IsError(Selection.Value) Then cellvalue = Selection.Text Else cellvalue = Selection.Value
+'Filter
+Selection.AutoFilter Field:=filtercolumn, Criteria1:="=" & cellvalue
 ```
 [➥full code](/macros/filter_by_selection.bas)
 
@@ -119,20 +129,17 @@ err:
 This does the opposite of above and filters out or removes only the selected value from your table. For instance, say you have a list of orders and want to remove all orders with a $0 value. Just click $0 in the table and then run this macro. 
 
 ```bas
-'Only filters one cell so this reduces the selection to one cell if multiple are selected
+'Can be used multiple times multiple columns
+'Only filters one cell so select first cell cell if multiple are selected
 If Selection.Count > 1 Then ActiveCell.Select
-On Error GoTo err
-    Selection.AutoFilter Field:=Selection.Column, Criteria1:="<>" & Selection.Value, Operator:=xlAnd
-Exit Sub
-err:
-    If err = 1004 Then
-        'Turn on autofilter if it's not on already
-        Selection.AutoFilter
-        Selection.AutoFilter Field:=Selection.Column, Criteria1:="<>" & Selection.Value, Operator:=xlAnd
-    Else
-        'If it doesn't work, filter out '#N/A'
-        Selection.AutoFilter Field:=Selection.Column, Criteria1:="<>#N/A", Operator:=xlAnd
-    End If
+'Check for existing filter
+If ActiveSheet.AutoFilterMode = False Then Selection.AutoFilter
+'Autofilter uses column number relative to the table
+filtercolumn = ActiveCell.Column - ActiveSheet.AutoFilter.Range.Column + 1
+'Check for error cell
+If IsError(Selection.Value) Then cellvalue = Selection.Text Else cellvalue = Selection.Value
+'Filter
+Selection.AutoFilter Field:=filtercolumn, Criteria1:="<>" & cellvalue, Operator:=xlAnd
 ```
 [➥full code](/macros/filter_out_selection.bas)
 
