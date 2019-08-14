@@ -1,17 +1,14 @@
 Sub FilterOutSelection()
 'Purpose: Filter OUT (remove) selected cell from the selection
-'Only filters one cell so this reduces the selection to one cell if multiple are selected
+'Can be used multiple times multiple columns
+'Only filters one cell so select first cell cell if multiple are selected
 If Selection.Count > 1 Then ActiveCell.Select
-On Error GoTo err
-    Selection.AutoFilter Field:=Selection.Column, Criteria1:="<>" & Selection.Value, Operator:=xlAnd
-Exit Sub
-err:
-    If err = 1004 Then
-        'Turn on autofilter if it's not on already
-        Selection.AutoFilter
-        Selection.AutoFilter Field:=Selection.Column, Criteria1:="<>" & Selection.Value, Operator:=xlAnd
-    Else
-        'If it doesn't work, filter out '#N/A'
-        Selection.AutoFilter Field:=Selection.Column, Criteria1:="<>#N/A", Operator:=xlAnd
-    End If
+'Check for existing filter
+If ActiveSheet.AutoFilterMode = False Then Selection.AutoFilter
+'Autofilter uses column number relative to the table
+filtercolumn = ActiveCell.Column - ActiveSheet.AutoFilter.Range.Column + 1
+'Check for error cell
+If IsError(Selection.Value) Then cellvalue = Selection.Text Else cellvalue = Selection.Value
+'Filter
+Selection.AutoFilter Field:=filtercolumn, Criteria1:="<>" & cellvalue, Operator:=xlAnd
 End Sub
